@@ -13,16 +13,29 @@ const VoiceLayout = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
+        width={220}
+        breakpoint="lg"
+        collapsedWidth="0"
+        theme="dark"
         style={{
-          width: '200px',
           background: '#001529',
-          minHeight: '100vh'
+          boxShadow: '2px 0 6px rgba(0,0,0,0.1)',
+          zIndex: 100,
         }}
       >
-        <VoiceSidebar style={{ height: '100%' }} />
+        <VoiceSidebar />
       </Sider>
+
       <Layout>
-        <Content>
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            background: '#fff',
+            borderRadius: 8,
+            minHeight: '100vh',
+          }}
+        >
           {location.pathname === '/gmtt' ? <GmttBot /> : <Voicebot />}
         </Content>
       </Layout>

@@ -3,10 +3,10 @@
 .contact-form-glass {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(123, 44, 191, 0.10);
+    /* box-shadow: 0 8px 32px rgba(123, 44, 191, 0.10); */
     padding: 40px 30px 30px 30px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(123, 44, 191, 0.10);
+    /* border: 1px solid rgba(123, 44, 191, 0.10); */
     margin-bottom: 40px;
 }
 
@@ -21,7 +21,7 @@
     padding: 16px 14px 16px 44px;
     border: 1.5px solid var(--primary-color);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.85);
+    /* background: rgba(255, 255, 255, 0.85); */
     font-size: 1.1rem;
     color: var(--text-color);
     outline: none;
@@ -57,7 +57,7 @@
     left: 10px;
     font-size: 0.92rem;
     color: var(--primary-color);
-    background: #fff;
+    /* background: #fff; */
     padding: 0 8px;
     border-radius: 6px;
     z-index: 2;
@@ -101,7 +101,7 @@
     margin-top: 36px;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(123, 44, 191, 0.10);
+    /* box-shadow: 0 8px 32px rgba(123, 44, 191, 0.10); */
 }
 
 
@@ -135,9 +135,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.7);
+    /* background: rgba(255, 255, 255, 0.7); */
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(123, 44, 191, 0.10);
+    /* box-shadow: 0 8px 32px rgba(123, 44, 191, 0.10); */
     padding: 32px 20px 20px 20px;
     min-height: 340px;
     margin-bottom: 24px;
@@ -158,15 +158,15 @@
 .social-icon-link {
     font-size: 2.1rem;
     color: var(--primary-color);
-    background: rgba(255, 255, 255, 0.8);
+    /* background: rgba(255, 255, 255, 0.8); */
     border-radius: 50%;
     width: 48px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(123, 44, 191, 0.10);
-    transition: background 0.2s, color 0.2s, transform 0.2s;
+    /* box-shadow: 0 2px 8px rgba(123, 44, 191, 0.10); */
+    /* transition: background 0.2s, color 0.2s, transform 0.2s; */
     border: 2px solid transparent;
 }
 
@@ -182,8 +182,8 @@
 
 .contact-info-card {
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 4px 20px rgba(123, 44, 191, 0.13);
+    /* background: rgba(255, 255, 255, 0.85); */
+    /* box-shadow: 0 4px 20px rgba(123, 44, 191, 0.13); */
     backdrop-filter: blur(8px);
     min-height: 180px;
     padding: 28px 20px;

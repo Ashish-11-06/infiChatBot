@@ -1,26 +1,29 @@
-import React from 'react';
-import { Row, Col, Typography, Button, Card } from 'antd';
+import React, { useState } from 'react';
 import {
-  FaUser,
-  FaEnvelope,
-  FaCommentDots,
+  Row,
+  Col,
+  Typography,
+  Button,
+  Card,
+  Form,
+  Input,
+} from 'antd';
+import {
   FaFacebook,
-  FaTwitter,
-  FaLinkedin,
   FaInstagram,
-  FaWhatsapp,
+  FaLinkedin,
   FaYoutube,
+  FaWhatsapp,
 } from 'react-icons/fa';
-import './Home.css';
+
 import './ContactUs.css';
-import img from '../assets/contact.gif'; // Your chatbot image
+import img from '../assets/contact.gif';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axiosInstance from '../utils/axiosIntance'; 
-import { useState } from 'react';
-
+import axiosInstance from '../utils/axiosIntance';
 
 const { Title, Paragraph } = Typography;
+const { TextArea } = Input;
 
 const socialLinks = [
   { icon: <FaFacebook />, url: 'https://www.facebook.com/prushal', label: 'Facebook' },
@@ -30,111 +33,96 @@ const socialLinks = [
   { icon: <FaWhatsapp />, url: 'https://wa.me/919850113269', label: 'WhatsApp' },
 ];
 
-function ContactUs() {
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
+const ContactUs = () => {
   const [loading, setLoading] = useState(false);
-  const [successMsg, setSuccessMsg] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post('/api/contact/', values);
+      toast.success(response.data.message || 'Message sent successfully!', {
+        position: 'top-right',
+      });
+    } catch (error) {
+      toast.error(
+        error.response?.data?.error || 'Failed to send message. Please try again.',
+        { position: 'top-right' }
+      );
+    } finally {
+      setLoading(false);
+    }
   };
-
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-
-  try {
-    const response = await axiosInstance.post('/api/contact/', formData);
-    toast.success(response.data.message || 'Message sent successfully!', {
-      position: 'top-right',
-    });
-    setFormData({ name: '', email: '', message: '' });
-  } catch (error) {
-    toast.error(
-      error.response?.data?.error || 'Failed to send message. Please try again.',
-      { position: 'top-right' }
-    );
-  } finally {
-    setLoading(false);
-  }
-};
 
   return (
     <div className="home-container contactus-narrow">
-       <ToastContainer />
+      <ToastContainer />
       <Row gutter={[32, 32]} align="middle" className="contact-hero-row">
-        {/* Contact Form */}
         <Col xs={24} md={12}>
           <div className="contact-form-glass">
-            <Title level={2} className="main-title" style={{ textAlign: 'left', marginBottom: 30 }}>
+            <Title level={2} style={{ marginBottom: 30 }}>
               Contact <span className="accent-text">Us</span>
             </Title>
-            <form className="contact-form" onSubmit={handleSubmit}>
+            <Form layout="vertical" onFinish={handleSubmit}>
+              <Form.Item
+                label="Name"
+                name="name"
+                rules={[{ required: true, message: 'Please enter your name' }]}
+              >
+                <Input placeholder="Enter your name" />
+              </Form.Item>
 
-              <div className="form-group floating-label">
-               <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-                <label><FaUser /> Name</label>
-              </div>
-              <div className="form-group floating-label">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                <label><FaEnvelope /> Email</label>
-              </div>
-              <div className="form-group floating-label">
-                <textarea
-                  rows={4}
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-                <label><FaCommentDots /> Your Message</label>
-              </div>
-             <Button htmlType="submit" className="primary-btn" style={{ width: '100%', marginTop: 20 }} loading={loading}>
-              Send Message
-            </Button>
-            </form>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  { required: true, message: 'Please enter your email' },
+                  { type: 'email', message: 'Please enter a valid email' },
+                ]}
+              >
+                <Input placeholder="Enter your email" />
+              </Form.Item>
+
+              <Form.Item
+                label="Message"
+                name="message"
+                rules={[{ required: true, message: 'Please enter your message' }]}
+              >
+                <TextArea rows={4} placeholder="Type your message here..." />
+              </Form.Item>
+
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                style={{ width: '100%', marginTop: 20 }}
+              >
+                Send Message
+              </Button>
+            </Form>
           </div>
         </Col>
 
-        {/* Social Media & Chatbot */}
-        <Col xs={24} md={12} className="contact-hero-art">
+        <Col xs={24} md={12}>
           <div className="contact-art-box">
             <img
               src={img}
-              alt="Chatbot Animation"
+              alt="Contact Illustration"
               className="contact-chatbot-img"
               style={{ width: '100%', maxWidth: 220, margin: '0 auto', display: 'block' }}
             />
-            <div className="social-media-section">
-              <Title level={4} style={{ color: 'var(--primary-color)', marginBottom: 12, fontWeight: 600, fontSize: '1.2rem' }}>Connect with us</Title>
-              <div className="social-icons-row">
+            <div className="social-media-section" style={{ marginTop: 30, textAlign: 'center' }}>
+              <Title level={4} style={{ color: 'var(--primary-color)', marginBottom: 12 }}>
+                Connect with us
+              </Title>
+              <div className="social-icons-row" style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
                 {socialLinks.map(({ icon, url, label }) => (
                   <a
                     key={label}
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="social-icon-link"
                     aria-label={label}
+                    style={{ fontSize: 24, color: '#7B2CBF' }}
                   >
                     {icon}
                   </a>
@@ -145,33 +133,33 @@ function ContactUs() {
         </Col>
       </Row>
 
-      {/* Info Section */}
-      <div className="contact-info-section">
+      <div className="contact-info-section" style={{ marginTop: 60 }}>
         <Row gutter={[32, 32]}>
           <Col xs={24} md={8}>
-            <Card className="contact-info-card" bordered={false}>
-              <Title level={4} className="feature-title">Indeed Inspiring Infotech</Title>
-              <Paragraph className="feature-desc">
-                We resource Corporate Trainers on demand.<br />
-                We impart professional Trainings in the domains that best fit for the corporates.
+            <Card bordered={false} className="contact-info-card">
+              <Title level={4}>Indeed Inspiring Infotech</Title>
+              <Paragraph>
+                We resource Corporate Trainers on demand.
+                <br />
+                We impart professional trainings in domains that best fit corporates.
               </Paragraph>
             </Card>
           </Col>
           <Col xs={24} md={8}>
-            <Card className="contact-info-card" bordered={false}>
-              <Title level={4} className="feature-title">Address</Title>
-              <Paragraph className="feature-desc">
+            <Card bordered={false} className="contact-info-card">
+              <Title level={4}>Address</Title>
+              <Paragraph>
                 Flat No 401<br />
                 Vrindavan Society,<br />
                 Near Samindradevi Market,<br />
-                BAIF Road, Wagholi Pune MH - 412207
+                BAIF Road, Wagholi, Pune MH - 412207
               </Paragraph>
             </Card>
           </Col>
           <Col xs={24} md={8}>
-            <Card className="contact-info-card" bordered={false}>
-              <Title level={4} className="feature-title">Contact</Title>
-              <Paragraph className="feature-desc">
+            <Card bordered={false} className="contact-info-card">
+              <Title level={4}>Contact</Title>
+              <Paragraph>
                 info@indeedinspiring.com<br />
                 (+91) 9850113269<br />
                 (+91) 9850603269<br />
@@ -181,13 +169,14 @@ function ContactUs() {
             </Card>
           </Col>
         </Row>
-        <div className="contact-map-section">
+
+        <div className="contact-map-section" style={{ marginTop: 36 }}>
           <iframe
             title="Company Location"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d682.6188161467643!2d73.98006358889943!3d18.574471260457578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c3fbd4314181%3A0x8dd7d41e1bdef971!2sSachin%20Wanis%20house!5e1!3m2!1sen!2sin!4v1743762710000!5m2!1sen!2sin"
             width="100%"
             height="280"
-            style={{ border: 0, borderRadius: 12, marginTop: 30 }}
+            style={{ border: 0, borderRadius: 12, boxShadow: '0 8px 32px rgba(123, 44, 191, 0.10)' }}
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -196,6 +185,6 @@ function ContactUs() {
       </div>
     </div>
   );
-}
+};
 
 export default ContactUs;

@@ -1,24 +1,31 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, Space } from 'antd';
-import { RocketFilled, MessageFilled, UserOutlined, InfoCircleFilled } from '@ant-design/icons';
-import './Navbar.css';
+import { Menu, Space, Layout, Button, Typography } from 'antd';
+import { 
+  RocketFilled, 
+  MessageFilled, 
+  UserOutlined, 
+  InfoCircleFilled 
+} from '@ant-design/icons';
+
+const { Header } = Layout;
+const { Text } = Typography;
 
 function Navbar() {
   const location = useLocation();
 
-  // Map paths to keys
   const getSelectedKey = () => {
-    if (location.pathname === '/' && location.hash === '#features') return 'features';
-    if (location.pathname === '/') return 'home';
-    if (location.pathname === '/about') return 'about';
-    if (location.pathname === '/login') return 'login';
-    if (location.pathname === '/register') return 'register';
-    if (location.pathname === '/features') return 'features';
-    if (location.pathname === '/contact') return 'contactus';
-    return '';
+    const pathMap = {
+      '/': location.hash === '#features' ? 'features' : 'home',
+      '/about': 'about',
+      '/login': 'login',
+      '/register': 'register',
+      '/features': 'features',
+      '/contact': 'contactus'
+    };
+    return pathMap[location.pathname] || '';
   };
-  // Define menu items using the items prop
+
   const menuItems = [
     {
       key: 'home',
@@ -43,32 +50,63 @@ function Navbar() {
       key: 'login',
       icon: <UserOutlined />,
       label: <Link to="/login">Login</Link>,
+      style: { marginLeft: 'auto' } // Pushes login/register to the right
     },
     {
       key: 'register',
       label: (
-        <Link to="/register" className="register-btn">
-          Register
+        <Link to="/register">
+          <Button type="primary">Register</Button>
         </Link>
       ),
     },
   ];
+
   return (
-    <div className="header-container">
-      <Link to="/" className="logo">
+    <Header style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '0 24px',
+      background: '#001529',
+      position: 'sticky',
+      top: 0,
+      zIndex: 1,
+      width: '100%'
+    }}>
+      {/* Logo Section */}
+      <Link to="/" style={{
+        display: 'flex',
+        alignItems: 'center',
+        color: 'inherit',
+        textDecoration: 'none'
+      }}>
         <Space>
-          <RocketFilled className="logo-icon" />
-          <span className="logo-text">Infi-Chat</span>
+          <RocketFilled style={{ fontSize: '24px', color: '#1890ff' }} />
+          <Text strong style={{ 
+            color: 'rgba(255, 255, 255, 0.85)',
+            fontSize: '18px'
+          }}>
+            Infi-Chat
+          </Text>
         </Space>
       </Link>
+
+      {/* Navigation Menu */}
       <Menu
         theme="dark"
         mode="horizontal"
-        className="nav-menu"
         selectedKeys={[getSelectedKey()]}
         items={menuItems}
+        style={{
+          flex: 1,
+          minWidth: 0,
+          justifyContent: 'flex-end',
+          borderBottom: 'none',
+          background: 'transparent'
+        }}
       />
-    </div>
+    </Header>
   );
 }
 

@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  HomeOutlined, 
+import {
+  HomeOutlined,
   AudioOutlined,
-  DownOutlined,
+  ClusterOutlined,
   UserOutlined,
   SettingOutlined,
-  LogoutOutlined,
-  ClusterOutlined
+  LogoutOutlined
 } from '@ant-design/icons';
+import { Layout, Menu, Avatar, Typography, Space, Divider } from 'antd';
+
+const { Sider } = Layout;
+const { Text } = Typography;
 
 const VoiceSidebar = () => {
   const location = useLocation();
-  const [activeSubmenu, setActiveSubmenu] = useState(null);
 
   const selectedKey = (() => {
     if (location.pathname.startsWith('/voicebot')) return 'voice';
@@ -20,159 +22,74 @@ const VoiceSidebar = () => {
     return 'home';
   })();
 
-  const sidebarStyle = {
-    // width: '250px',
-    height: '100vh',
-    // background: 'linear-gradient(135deg, #1e3a8a 0%, #111827 100%)',
-     background: 'linear-gradient(135deg, #5a189a 0%, #10002b 100%)',
-    padding: '24px 0',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '4px',
-    boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
-    position: 'fixed',
-    left: 0,
-    top: 0,
-  };
-
-  const itemStyle = {
-    fontSize: '15px',
-    fontWeight: '500',
-    color: '#ffffff',
-    padding: '14px 24px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '14px',
-    position: 'relative',
-    transition: 'all 0.2s ease',
-    borderRadius: '0 6px 6px 0',
-    cursor: 'pointer',
-    margin: '4px 0',
-  };
-
-  const activeItemStyle = {
-    ...itemStyle,
-    background: 'rgba(255, 255, 255, 0.15)',
-  };
-
-  const activeIndicator = {
-    position: 'absolute',
-    left: '0',
-    top: '0',
-    height: '100%',
-    width: '4px',
-    background: '#3b82f6',
-    borderRadius: '0 4px 4px 0',
-  };
-
-  const linkStyle = {
-    color: 'inherit',
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '14px',
-    width: '100%',
-  };
-
-  const iconStyle = {
-    fontSize: '18px',
-    color: '#ffffff',
-  };
-
-  const profileSection = {
-    marginTop: 'auto',
-    padding: '16px 24px',
-    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-  };
-
-  const toggleSubmenu = (menu) => {
-    setActiveSubmenu(activeSubmenu === menu ? null : menu);
-  };
-
   return (
-    <div style={sidebarStyle}>
-      <div style={{ padding: '0 24px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div style={{ 
-          width: '40px', 
-          height: '40px', 
-          background: '#3b82f6', 
-          borderRadius: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          fontWeight: 'bold',
-          fontSize: '18px'
-        }}>
+    <Sider
+      width={220}
+      style={{
+        // minHeight: '100vh',
+        // background: 'linear-gradient(135deg, #5a189a 0%, #10002b 100%)',
+        boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
+        position: 'fixed',
+        // left: 0,
+        // top: 0,
+        zIndex: 1,
+      }}
+    >
+      <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div
+          style={{
+            width: 40,
+            height: 40,
+            background: '#3b82f6',
+            borderRadius: 8,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: 18,
+          }}
+        >
           ∞
         </div>
-        <h3 style={{ color: 'white', margin: 0, fontSize: '18px' }}>Infi Chat</h3>
+        <Text style={{ color: 'white', fontSize: 18, margin: 0 }}>Infi Chat</Text>
       </div>
 
-      {/* Main Menu Items */}
-      <div
-        style={selectedKey === 'home' ? activeItemStyle : itemStyle}
-        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.background = selectedKey === 'home' ? 'rgba(255, 255, 255, 0.15)' : 'transparent'}
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[selectedKey]}
+        selectedKeys={[selectedKey]}
+        style={{ background: 'transparent', borderRight: 0, color: 'white' }}
       >
-        {selectedKey === 'home' && <div style={activeIndicator} />}
-        <Link to="/" style={linkStyle}>
-          <HomeOutlined style={iconStyle} />
-          <span>Home Dashboard</span>
-        </Link>
-      </div>
+        <Menu.Item key="home" icon={<HomeOutlined />} style={{ marginBlock: 4 }}>
+          <Link to="/">Home Dashboard</Link>
+        </Menu.Item>
+        <Menu.Item key="voice" icon={<AudioOutlined />} style={{ marginBlock: 4 }}>
+          <Link to="/voicebot">Voice Bot</Link>
+        </Menu.Item>
+        <Menu.Item key="gmtt" icon={<ClusterOutlined />} style={{ marginBlock: 4 }}>
+          <Link to="/gmtt">Give Me Tree</Link>
+        </Menu.Item>
+      </Menu>
 
-      <div
-        style={selectedKey === 'voice' ? activeItemStyle : itemStyle}
-        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.background = selectedKey === 'voice' ? 'rgba(255, 255, 255, 0.15)' : 'transparent'}
-      >
-        {selectedKey === 'voice' && <div style={activeIndicator} />}
-        <Link to="/voicebot" style={linkStyle}>
-          <AudioOutlined style={iconStyle} />
-          <span>Voice Bot</span>
-        </Link>
-      </div>
+      {/* <Divider style={{ background: 'rgba(255, 255, 255, 0.2)', margin: '16px 0' }} /> */}
 
-      <div
-        style={selectedKey === 'gmtt' ? activeItemStyle : itemStyle}
-        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.background = selectedKey === 'gmtt' ? 'rgba(255, 255, 255, 0.15)' : 'transparent'}
-      >
-        {selectedKey === 'gmtt' && <div style={activeIndicator} />}
-        <Link to="/gmtt" style={linkStyle}>
-          <ClusterOutlined style={iconStyle} />
-          <span>Give Me Tree</span>
-        </Link>
+      <div style={{ padding: '0 24px', marginTop: 'auto', color: 'white' }}>
+        <Space align="center">
+          <Avatar icon={<UserOutlined />} style={{ backgroundColor: 'rgba(255,255,255,0.15)' }} />
+          <div>
+            <Text strong style={{ color: 'white' }}>John Doe</Text>
+            <br />
+            <Text style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12 }}>Admin</Text>
+          </div>
+          <Space size="middle">
+            <SettingOutlined style={{ color: 'rgba(255, 255, 255, 0.7)', cursor: 'pointer' }} />
+            <LogoutOutlined style={{ color: 'rgba(255, 255, 255, 0.7)', cursor: 'pointer' }} />
+          </Space>
+        </Space>
       </div>
-
-      {/* Profile Section */}
-      <div style={profileSection}>
-        <div style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.1)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#ffffff',
-        }}>
-          <UserOutlined />
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ color: 'white', fontWeight: '500' }}>John Doe</div>
-          <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '12px' }}>Admin</div>
-        </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <SettingOutlined style={{ color: 'rgba(255, 255, 255, 0.7)', cursor: 'pointer' }} />
-          <LogoutOutlined style={{ color: 'rgba(255, 255, 255, 0.7)', cursor: 'pointer' }} />
-        </div>
-      </div>
-    </div>
+    </Sider>
   );
 };
 
