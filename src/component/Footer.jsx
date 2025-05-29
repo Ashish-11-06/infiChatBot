@@ -26,7 +26,7 @@ function Footer() {
 
   return (
     <AntFooter style={{ 
-      background: '#001529',
+      background: '#4e1b6b',
       color: 'rgba(255, 255, 255, 0.85)',
       padding: '40px 0 0'
     }}>

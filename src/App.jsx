@@ -57,7 +57,8 @@ function App() {
                 <Navbar />
               </Header>
 
-              <Content className="app-content">
+              <Content className="app-content" style={{ padding: '50px' }}>
+                {/* Conditional rendering for GmttBot */}
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />

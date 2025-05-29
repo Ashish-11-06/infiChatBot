@@ -28,7 +28,7 @@ const VoiceSidebar = () => {
       style={{
         // minHeight: '100vh',
         // background: 'linear-gradient(135deg, #5a189a 0%, #10002b 100%)',
-        boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
+        // boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
         position: 'fixed',
         // left: 0,
         // top: 0,

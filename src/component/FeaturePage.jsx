@@ -29,17 +29,17 @@ const { Title, Paragraph, Text } = Typography;
 
 const features = [
   {
-    icon: <FaBrain style={{ fontSize: '32px', color: '#1890ff' }} />,
+    icon: <FaBrain style={{ fontSize: '32px' }} />,
     title: 'Contextual Conversations using NLU',
     description: 'Understands user intent and context, enabling natural, meaningful, and dynamic conversations using advanced Natural Language Understanding.'
   },
   {
-    icon: <FaBook style={{ fontSize: '32px', color: '#1890ff' }} />,
+    icon: <FaBook style={{ fontSize: '32px' }} />,
     title: 'Pre-trained with FAQs and Internal Documents',
     description: `Instantly ready to answer common questions and reference your company's knowledge base, reducing setup time and improving accuracy.`
   },
   {
-    icon: <FaHandsHelping style={{ fontSize: '32px', color: '#1890ff' }} />,
+    icon: <FaHandsHelping style={{ fontSize: '32px' }} />,
     title: 'Fallback and Escalation to Human Support',
     description: 'Seamlessly transfers complex or sensitive queries to human agents, ensuring users always get the help they need.'
   }
@@ -47,7 +47,7 @@ const features = [
 
 function Features() {
   return (
-    <div style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
       {/* Hero Section */}
       <Space 
         direction="vertical" 
@@ -56,9 +56,10 @@ function Features() {
         style={{ 
           textAlign: 'center', 
           padding: '60px 0',
-          background: '#f0f5ff',
           borderRadius: '8px',
-          marginBottom: '48px'
+          marginBottom: '48px',
+          alignItems: 'center',
+          borderBottom: '1px solidrgb(184, 27, 27)'
         }}
       >
         <Title level={1} style={{ marginBottom: '16px' }}>
@@ -76,7 +77,7 @@ function Features() {
           </Text>
         </Title>
         
-        <Paragraph style={{ fontSize: '18px', maxWidth: '800px' }}>
+        <Paragraph style={{ fontSize: '18px', maxWidth: '800px', textAlign: 'center' }}>
           Discover the intelligent features that make InFi-Chatbot your best AI-powered assistant for business and support.
         </Paragraph>
         
@@ -103,10 +104,11 @@ function Features() {
               style={{ 
                 height: '100%',
                 textAlign: 'center',
-                borderRadius: '8px'
+                borderRadius: '8px',
+                color: '#7a3caa',
               }}
             >
-              <div style={{ marginBottom: '16px' }}>
+              <div style={{ marginBottom: '16px' , color: '#7a3caa', fontSize: '32px' }}>
                 {feature.icon}
               </div>
               <Title level={3} style={{ marginBottom: '16px' }}>
@@ -126,30 +128,36 @@ function Features() {
       </Divider>
       
       <Row gutter={[16, 16]} style={{ marginBottom: '48px' }}>
-        {[
-          { icon: <FaRobot />, title: 'Multi-platform Support' },
-          { icon: <FaDatabase />, title: 'Knowledge Base Integration' },
-          { icon: <FaChartLine />, title: 'Analytics Dashboard' },
-          { icon: <FaUserFriends />, title: 'User Management' },
-          { icon: <FaRegCommentDots />, title: 'Conversation History' },
-          { icon: <FaRegFileAlt />, title: 'Document Processing' }
-        ].map((item, index) => (
-          <Col xs={12} sm={8} md={4} key={index}>
-            <Card 
-              hoverable
-              style={{ 
-                textAlign: 'center',
-                borderRadius: '8px'
-              }}
-            >
-              <div style={{ fontSize: '24px', color: '#1890ff', marginBottom: '8px' }}>
-                {item.icon}
-              </div>
-              <Text strong>{item.title}</Text>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+  {[
+    { icon: <FaRobot />, title: 'Multi-platform Support' },
+    { icon: <FaDatabase />, title: 'Knowledge Base Integration' },
+    { icon: <FaChartLine />, title: 'Analytics Dashboard' },
+    { icon: <FaUserFriends />, title: 'User Management' },
+    { icon: <FaRegCommentDots />, title: 'Conversation History' },
+    { icon: <FaRegFileAlt />, title: 'Document Processing' }
+  ].map((item, index) => (
+    <Col xs={12} sm={8} md={4} key={index}>
+      <Card
+        hoverable
+        style={{
+          textAlign: 'center',
+          borderRadius: '8px',
+          height: '180px',          // fixed height for all cards
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center', // center content vertically
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ fontSize: '24px', color: '#7a3caa', marginBottom: '8px' }}>
+          {item.icon}
+        </div>
+        <Text strong>{item.title}</Text>
+      </Card>
+    </Col>
+  ))}
+</Row>
+
     </div>
   );
 }

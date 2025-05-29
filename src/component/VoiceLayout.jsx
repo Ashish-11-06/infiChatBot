@@ -5,40 +5,55 @@ import VoiceSidebar from './VoiceSidebar';
 import Voicebot from './Voicebot';
 import GmttBot from './GmttBot';
 
-const { Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 const VoiceLayout = () => {
   const location = useLocation();
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ Height: '80vh' }}>
+      {/* Fixed Top Header */}
+      <Header
+        style={{
+          background: '#4e1b6b',
+          display: 'flex',
+          alignItems: 'center',
+          height: '60px',
+          position: 'fixed',
+          width: '100%',
+          zIndex: 2,
+          padding: '0 20px',
+          margin: '-8px -8px',
+        }}
+      >
+        <h1 style={{ color: 'white', margin: 0 }}>Voicebot</h1>
+      </Header>
+
+      {/* Sidebar */}
       <Sider
         width={220}
-        breakpoint="lg"
-        collapsedWidth="0"
-        theme="dark"
         style={{
-          background: '#001529',
-          boxShadow: '2px 0 6px rgba(0,0,0,0.1)',
-          zIndex: 100,
+          position: 'fixed',
+          top: 60,
+          bottom: 0,
+          left: 0,
+          zIndex: 1,
+          background: 'linear-gradient(135deg, #5a189a 0%, #10002b 100%)',
         }}
       >
         <VoiceSidebar />
       </Sider>
-
-      <Layout>
-        <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            background: '#fff',
-            borderRadius: 8,
-            minHeight: '100vh',
-          }}
-        >
-          {location.pathname === '/gmtt' ? <GmttBot /> : <Voicebot />}
-        </Content>
-      </Layout>
+        <Content style={{ padding: '20px', overflowY: 'auto', marginLeft: 220, marginTop: 60 }}>
+          {location.pathname.startsWith('/voicebot') ? (
+            <Voicebot />
+          ) : location.pathname.startsWith('/gmtt') ? (
+            <GmttBot />
+          ) : (
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+              <h2>Select a bot from the sidebar</h2>
+            </div>
+          )}
+        </Content>  
     </Layout>
   );
 };

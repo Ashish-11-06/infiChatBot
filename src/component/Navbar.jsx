@@ -50,8 +50,7 @@ function Navbar() {
       key: 'login',
       icon: <UserOutlined />,
       label: <Link to="/login">Login</Link>,
-      style: { marginLeft: 'auto' } // Pushes login/register to the right
-    },
+        },
     {
       key: 'register',
       label: (
@@ -68,21 +67,22 @@ function Navbar() {
       alignItems: 'center',
       justifyContent: 'space-between',
       padding: '0 24px',
-      background: '#001529',
-      position: 'sticky',
+      background: '#4e1b6b',
+      position: 'fixed',  // Changed from sticky to fixed
       top: 0,
-      zIndex: 1,
-      width: '100%'
+      left: 0,
+      right: 0,
+      zIndex: 1000,       // Higher z-index to stay on top
+      height: '50px',
+      // boxShadow: '0 2px 8px rgba(0,0,0,0.15)', // optional shadow for separation
     }}>
       {/* Logo Section */}
       <Link to="/" style={{
-        display: 'flex',
         alignItems: 'center',
-        color: 'inherit',
         textDecoration: 'none'
       }}>
         <Space>
-          <RocketFilled style={{ fontSize: '24px', color: '#1890ff' }} />
+          <RocketFilled style={{ fontSize: '24px'}} />
           <Text strong style={{ 
             color: 'rgba(255, 255, 255, 0.85)',
             fontSize: '18px'
@@ -94,16 +94,14 @@ function Navbar() {
 
       {/* Navigation Menu */}
       <Menu
-        theme="dark"
         mode="horizontal"
         selectedKeys={[getSelectedKey()]}
         items={menuItems}
         style={{
-          flex: 1,
-          minWidth: 0,
           justifyContent: 'flex-end',
           borderBottom: 'none',
-          background: 'transparent'
+          background: 'transparent',
+          color: 'rgba(255, 255, 255, 0.85)',
         }}
       />
     </Header>

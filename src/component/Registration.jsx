@@ -70,15 +70,15 @@ function Registration() {
       <Card
         style={{
           width: '100%',
-          maxWidth: '480px',
-          borderRadius: '12px',
+          maxWidth: '500px',
+          // borderRadius: '12px',
           // boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
           overflow: 'hidden',
-          marginTop: '-40px',
+          // marginTop: '-40px',
         }}
         bodyStyle={{ padding: '40px' }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+        <div style={{ textAlign: 'center'}}>
           <Title level={2} >
             Create Account
           </Title>
@@ -147,14 +147,7 @@ function Registration() {
               block
               size="large"
               loading={loading}
-              style={{
-                height: '48px',
-                fontSize: '16px',
-                // background: 'linear-gradient(135deg, #6a0dad 0%, #8a2be2 100%)',
-                border: 'none',
-                borderRadius: '8px',
-                marginTop: '10px',
-              }}
+            
             >
               Register
             </Button>
@@ -168,10 +161,10 @@ function Registration() {
               type="link"
               onClick={() => navigate('/login')}
               style={{
-                padding: 0,
-                fontSize: '16px',
+                // padding: 0,
+                // fontSize: '16px',
                 // color: '#6a0dad',
-                fontWeight: '500',
+                // fontWeight: '500',
               }}
             >
               Sign in

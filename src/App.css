@@ -1,0 +1,30 @@
+.css-dev-only-do-not-override-1mg18ep.ant-menu-light.ant-menu-horizontal >.ant-menu-item-selected, .css-dev-only-do-not-override-1mg18ep.ant-menu-light>.ant-menu.ant-menu-horizontal >.ant-menu-item-selected, .css-dev-only-do-not-override-1mg18ep.ant-menu-light.ant-menu-horizontal >.ant-menu-submenu-selected, .css-dev-only-do-not-override-1mg18ep.ant-menu-light>.ant-menu.ant-menu-horizontal >.ant-menu-submenu-selected {
+    color: #ffffff;
+    background-color: transparent;
+}
+
+.css-dev-only-do-not-override-1mg18ep.ant-menu-light .ant-menu-item a, .css-dev-only-do-not-override-1mg18ep.ant-menu-light>.ant-menu .ant-menu-item a, .css-dev-only-do-not-override-1mg18ep.ant-menu-light .ant-menu-item a:hover, .css-dev-only-do-not-override-1mg18ep.ant-menu-light>.ant-menu .ant-menu-item a:hover {
+    color: #fdf9ff;
+}
+.css-dev-only-do-not-override-1mg18ep.ant-menu .ant-menu-item .ant-menu-item-icon, .css-dev-only-do-not-override-1mg18ep.ant-menu .ant-menu-submenu-title .ant-menu-item-icon {
+    color: #fdf9ff;
+}
+/* .css-dev-only-do-not-override-1mg18ep.ant-menu-light.ant-menu-horizontal >.ant-menu-item::after, .css-dev-only-do-not-override-1mg18ep.ant-menu-light>.ant-menu.ant-menu-horizontal >.ant-menu-item::after, .css-dev-only-do-not-override-1mg18ep.ant-menu-light.ant-menu-horizontal >.ant-menu-submenu::after, .css-dev-only-do-not-override-1mg18ep.ant-menu-light>.ant-menu.ant-menu-horizontal >.ant-menu-submenu::after {
+    position: absolute;
+    inset-inline: 16px;
+    bottom: 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    content: "";
+    color: #ffffff;
+} */
+.ant-menu-item-selected {
+  color: #f2fff5 !important; /* Ant Design blue */
+  border-bottom: 2px solid #ffffff; /* Optional underline */
+}
+.css-dev-only-do-not-override-1mg18ep.ant-layout-sider .ant-layout-sider-children {
+    height: 100%;
+    margin-top: -0.1px;
+    padding-top: 0.1px;
+    background: #4e1b6b;
+}
