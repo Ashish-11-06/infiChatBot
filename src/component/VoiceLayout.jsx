@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import VoiceSidebar from './VoiceSidebar';
 import Voicebot from './Voicebot';
 import GmttBot from './GmttBot';
+import InterviewBot from './InterviewBot';
 
 const { Header, Sider, Content } = Layout;
 
@@ -48,6 +49,8 @@ const VoiceLayout = () => {
             <Voicebot />
           ) : location.pathname.startsWith('/gmtt') ? (
             <GmttBot />
+          ) : location.pathname.startsWith('/interviewbot') ? (
+            <InterviewBot />
           ) : (
             <div style={{ textAlign: 'center', marginTop: '20px' }}>
               <h2>Select a bot from the sidebar</h2>

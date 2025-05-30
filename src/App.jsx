@@ -15,6 +15,7 @@ import GmttBot from './component/GmttBot';
 import './App.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ThankU from './component/ThankU';
 
 const { Header, Content, Footer: AntFooter } = Layout;
 
@@ -39,6 +40,16 @@ function App() {
             </div>
           }
         />
+        <Route
+          path="/interviewbot"
+          element={
+            <div className="voicebot-isolation-wrapper">
+              <VoiceLayout />
+        </div>
+      }
+    />
+     <Route path="/thanku" element={<ThankU />} />
+
           <Route
           path="/gmtt"
           element={
@@ -66,6 +77,7 @@ function App() {
                   <Route path="/features" element={<FeaturePage />} />
                   <Route path="/register" element={<Registration />} />
                   <Route path="/contact" element={<ContactUs />} />
+                    
                 </Routes>
               </Content>
 

@@ -6,9 +6,10 @@ import {
   ClusterOutlined,
   UserOutlined,
   SettingOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  SolutionOutlined, // New icon
 } from '@ant-design/icons';
-import { Layout, Menu, Avatar, Typography, Space, Divider } from 'antd';
+import { Layout, Menu, Avatar, Typography, Space } from 'antd';
 
 const { Sider } = Layout;
 const { Text } = Typography;
@@ -19,6 +20,7 @@ const VoiceSidebar = () => {
   const selectedKey = (() => {
     if (location.pathname.startsWith('/voicebot')) return 'voice';
     if (location.pathname.startsWith('/gmtt')) return 'gmtt';
+    if (location.pathname.startsWith('/interviewbot')) return 'interview';
     return 'home';
   })();
 
@@ -26,15 +28,11 @@ const VoiceSidebar = () => {
     <Sider
       width={220}
       style={{
-        // minHeight: '100vh',
-        // background: 'linear-gradient(135deg, #5a189a 0%, #10002b 100%)',
-        // boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
         position: 'fixed',
-        // left: 0,
-        // top: 0,
         zIndex: 1,
       }}
     >
+      {/* Logo/Header */}
       <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 }}>
         <div
           style={{
@@ -55,26 +53,32 @@ const VoiceSidebar = () => {
         <Text style={{ color: 'white', fontSize: 18, margin: 0 }}>Infi Chat</Text>
       </div>
 
+      {/* Menu Items */}
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={[selectedKey]}
         selectedKeys={[selectedKey]}
         style={{ background: 'transparent', borderRight: 0, color: 'white' }}
       >
         <Menu.Item key="home" icon={<HomeOutlined />} style={{ marginBlock: 4 }}>
-          <Link to="/">Home Dashboard</Link>
+          <Link to="/"> Home Dashboard</Link>
         </Menu.Item>
+
         <Menu.Item key="voice" icon={<AudioOutlined />} style={{ marginBlock: 4 }}>
-          <Link to="/voicebot">Voice Bot</Link>
+          <Link to="/voicebot"> Voice Bot</Link>
         </Menu.Item>
+
+         <Menu.Item key="interview" icon={<SolutionOutlined />} style={{ marginBlock: 4 }}>
+          <Link to="/interviewbot"> Interview Bot</Link>
+        </Menu.Item>
+
         <Menu.Item key="gmtt" icon={<ClusterOutlined />} style={{ marginBlock: 4 }}>
-          <Link to="/gmtt">Give Me Tree</Link>
+          <Link to="/gmtt"> Give Me Tree</Link>
         </Menu.Item>
+       
       </Menu>
 
-      {/* <Divider style={{ background: 'rgba(255, 255, 255, 0.2)', margin: '16px 0' }} /> */}
-
+      {/* User Info + Settings */}
       <div style={{ padding: '0 24px', marginTop: 'auto', color: 'white' }}>
         <Space align="center">
           <Avatar icon={<UserOutlined />} style={{ backgroundColor: 'rgba(255,255,255,0.15)' }} />
